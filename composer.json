@@ -1,5 +1,5 @@
 {
-  "name": "paulmillband/m2-admin-products-to-admin",
+  "name": "paulmillband/m2-admin-products-to-category",
   "description": "magento 2 update category products in admin",
   "type": "magento2-module",
   "authors": [

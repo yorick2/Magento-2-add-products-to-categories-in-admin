@@ -1,0 +1,169 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<!--<div class="fieldset-wrapper" id="add-products-to-category-wrapper">-->
+<!--    <fieldset class="fieldset" id="grop_fields">-->
+<!--        <legend class="legend">-->
+<!--            <span>--><?//= /* @escapeNotVerified */ __('Add Product To Categories') ?><!--</span>-->
+<!--        </legend>-->
+<!--        <br>-->
+<!--        <div class="store-scope">-->
+<!--            <div class="store-tree" id="add-products-to-category-content">-->
+<!--                --><?php //foreach (  $block->getCategoryCollection() as $_category): ?>
+<!--                    <div class="category-name">-->
+<!--                        <input name="add_category_ids[]"-->
+<!--                               value="--><?//= /* @escapeNotVerified */ $_category->getId() ?><!--"-->
+<!--                               --><?php //if ($block->getCategoriesReadonly()): ?>
+<!--                                   disabled="disabled"-->
+<!--                               --><?php //endif;?>
+<!--                               class="checkbox category-checkbox"-->
+<!--                               id="add_product_category_--><?//= /* @escapeNotVerified */ $_category->getId() ?><!--"-->
+<!--                               type="checkbox" />-->
+<!--                        <label for="add_product_category_--><?//= /* @escapeNotVerified */ $_category->getId() ?><!--">-->
+<!--                            --><?//= $block->escapeHtml($_category->getName()) ?>
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                --><?php //endforeach; ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </fieldset>-->
+<!--</div>-->
+<!---->
+<!--<div class="fieldset-wrapper" id="remove-products-to-category-wrapper">-->
+<!--    <fieldset class="fieldset" id="grop_fields">-->
+<!--        <legend class="legend">-->
+<!--            <span>--><?//= /* @escapeNotVerified */ __('Remove Product From Categories') ?><!--</span>-->
+<!--        </legend>-->
+<!--        <br>-->
+<!--        <div class="messages">-->
+<!--            <div class="message message-notice">-->
+<!--                <div>--><?//= /* @escapeNotVerified */ __('To hide an item in catalog or search results, set the status to "Disabled".') ?><!--</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="store-scope">-->
+<!--            <div class="store-tree" id="remove-products-to-category-content">-->
+<!--                --><?php //foreach ($block->getCategoryCollection() as $_category): ?>
+<!--                    <div class="category-name">-->
+<!--                        <input name="remove_category_ids[]"-->
+<!--                               value="--><?//= /* @escapeNotVerified */ $_category->getId() ?><!--"-->
+<!--                               --><?php //if ($block->getCategoriesReadonly()): ?>
+<!--                                   disabled="disabled"-->
+<!--                               --><?php //endif;?>
+<!--                               class="checkbox category-checkbox"-->
+<!--                               id="remove_product_category_--><?//= /* @escapeNotVerified */ $_category->getId() ?><!--"-->
+<!--                               type="checkbox" />-->
+<!--                        <label for="remove_product_category_--><?//= /* @escapeNotVerified */ $_category->getId() ?><!--">-->
+<!--                            --><?//= $block->escapeHtml($_category->getName()) ?>
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                --><?php //endforeach; ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </fieldset>-->
+<!--</div>-->
+<!---->
+<!--<script>-->
+<!--    require([-->
+<!--        'prototype'-->
+<!--    ], function () {-->
+<!--        var productCategoryCheckboxes = $$('.category-checkbox');-->
+<!---->
+<!--        for(var i=0;i<productCategoryCheckboxes.length;i++){-->
+<!--            Event.observe(productCategoryCheckboxes[i], 'click', toggleStoreFromChoosers);-->
+<!--        }-->
+<!---->
+<!--        function toggleStoreFromChoosers(event){-->
+<!--            var element = Event.element(event);-->
+<!--            var selects = $(element.id+'_data').getElementsBySelector('select');-->
+<!--            var selectBlocks = $(element.id+'_data').getElementsByClassName('category-'+element.value+'-select');-->
+<!--            for (var i=0; i<selects.length; i++) {-->
+<!--                selects[i].disabled=!element.checked;-->
+<!--            }-->
+<!--            for (var i=0; i<selectBlocks.length; i++) {-->
+<!--                if (element.checked) {-->
+<!--                    selectBlocks[i].show();-->
+<!--                }-->
+<!--                else {-->
+<!--                    selectBlocks[i].hide();-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+$categories = $this->getCategoryCollection();
+$categoryHelper = $this->getCategoryHelper();
+?>
+<ul>
+    <?php
+    foreach ($categories as $category):
+        if (!$category->getIsActive()) {
+            continue;
+        }
+
+        ?>
+        <li><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
+        </li>
+        <?php
+        if ($childrenCategories = $this->getChildCategories($category)):
+            ?>
+            <ul>
+                <?php
+                foreach ($childrenCategories as $childrenCategory):
+                    if (!$childrenCategory->getIsActive()) {
+                        continue;
+                    }
+                    ?>
+                    <li>
+                        <a href="<?php echo $categoryHelper->getCategoryUrl($childrenCategory) ?>"><?php echo $childrenCategory->getName() ?></a>
+                    </li>
+                    <?php if ($this->getChildCategories($childrenCategory)): ?>
+                            <?php echo $this->getSubBlockHtml($this->getChildCategories($childrenCategory)); ?>
+                    <?php endif ?>
+                    <?php
+                endforeach;
+                ?>
+            </ul>
+            <?php
+        endif;
+    endforeach;
+    ?>
+</ul>
