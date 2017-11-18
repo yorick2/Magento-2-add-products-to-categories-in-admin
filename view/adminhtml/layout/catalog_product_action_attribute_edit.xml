@@ -1,19 +1,22 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <page>
     <body>
         <referenceBlock  name="attributes_tabs">
-            <block class="Paulmillband\AdminProductsToCategory\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\Categories"
-                   name="tab_categories"
-                   template="Paulmillband_AdminProductsToCategory::catalog/product/edit/action/categories.phtml"/>
-
+            <block class="Paulmillband\AdminProductsToCategory\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\CategoriesTab"
+               name="tab_categories"
+               template="Paulmillband_AdminProductsToCategory::catalog/product/edit/action/categoriesTab.phtml"
+            >
+               <block class="Paulmillband\AdminProductsToCategory\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\CategoryList"
+                   name="tab_categories_add"
+                   template="Paulmillband_AdminProductsToCategory::catalog/product/edit/action/addCategories.phtml"
+               />
+               <block class="Paulmillband\AdminProductsToCategory\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\CategoryList"
+                   name="tab_categories_remove"
+                   template="Paulmillband_AdminProductsToCategory::catalog/product/edit/action/removeCategories.phtml"
+               />
+            </block>
             <action method="addTab">
-                <argument name="name" xsi:type="string">categories</argument>
+                <argument name="name" xsi:type="string">add_categories</argument>
                 <argument name="block" xsi:type="string">tab_categories</argument>
             </action>
         </referenceBlock>

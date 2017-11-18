@@ -1,24 +1,9 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-/**
- * Product mass attribute update categories tab
- *
- * @author      Magento Core Team <core@magentocommerce.com>
- */
 namespace Paulmillband\AdminProductsToCategory\Block\Adminhtml\Product\Edit\Action\Attribute\Tab;
 
 use Magento\Store\Model\Group;
 
-/**
- * @api
- * @since 100.0.2
- */
-class Categories extends \Magento\Backend\Block\Widget
-    implements \Magento\Backend\Block\Widget\Tab\TabInterface
+class CategoryList extends \Magento\Backend\Block\Widget
 {
     protected $categoryHelper;
     protected $categoryFactory;
@@ -32,7 +17,6 @@ class Categories extends \Magento\Backend\Block\Widget
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-//        \Magento\Catalog\Model\ResourceModel\Category\Tree $categoryTree,
         \Magento\Catalog\Model\ResourceModel\Category\TreeFactory $categoryTreeFactory,
         \Magento\Catalog\Model\Indexer\Category\Flat\State $categoryFlatState,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
@@ -53,56 +37,20 @@ class Categories extends \Magento\Backend\Block\Widget
         );
     }
 
-
     /**
-     * Tab settings
-     *
-     * @return \Magento\Framework\Phrase
-     */
-    public function getTabLabel()
-    {
-        return __('Categories');
-    }
-
-    /**
-     * @return \Magento\Framework\Phrase
-     */
-    public function getTabTitle()
-    {
-        return __('Categories');
-    }
-
-    /**
-     * @return bool
-     */
-    public function canShowTab()
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isHidden()
-    {
-        return false;
-    }
-
-    /**
-     * Retrieve current store level 2 category
-     *
-     * @param bool|string $sorted (if true display collection sorted as name otherwise sorted as based on id asc)
-     * @param bool $asCollection (if true display all category otherwise display second level category menu visible category for current store)
+     * @param bool $sorted
+     * @param bool $asCollection
      * @param bool $toLoad
+     * @return \Magento\Framework\Data\Tree\Node\Collection
      */
-
     public function getStoreCategories($sorted = false, $asCollection = false, $toLoad = true)
     {
         return $this->categoryHelper->getStoreCategories($sorted , $asCollection, $toLoad);
     }
 
     /**
-     * @return Category[]
+     * @return \Magento\Framework\Data\Tree\Node\Collection or
+     * \Magento\Catalog\Model\ResourceModel\Category\Collection
      */
     public function getCategoryCollection()
     {
@@ -112,10 +60,14 @@ class Categories extends \Magento\Backend\Block\Widget
         return $this->categoryCollection;
     }
 
+    /**
+     * @param $categoryCollection \Magento\Framework\Data\Tree\Node\Collection
+     */
     public function setCategoryCollection($categoryCollection)
     {
         $this->categoryCollection = $categoryCollection;
     }
+
     /**
      * Return categories helper
      */
@@ -125,8 +77,9 @@ class Categories extends \Magento\Backend\Block\Widget
     }
 
     /**
-     * Retrieve child store categories
-     *
+     * @param $category \Magento\Framework\Data\Tree\Node\Collection or
+     * \Magento\Catalog\Model\ResourceModel\Category\Collection
+     * @return array
      */
     public function getChildCategories($category)
     {
@@ -138,6 +91,11 @@ class Categories extends \Magento\Backend\Block\Widget
         return $subcategories;
     }
 
+    /**
+     * @param $categories \Magento\Framework\Data\Tree\Node\Collection or
+     * \Magento\Catalog\Model\ResourceModel\Category\Collection
+     * @return mixed
+     */
     public function getSubBlockHtml($categories){
         $class = get_class($this);
         $template = $this->getTemplate();
@@ -157,7 +115,4 @@ class Categories extends \Magento\Backend\Block\Widget
     {
         return $group->getStores();
     }
-
-
-
 }

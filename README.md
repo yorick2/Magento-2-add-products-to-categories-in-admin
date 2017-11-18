@@ -1,1 +1,1 @@
-# magento 2 update category products in admin
+# magento 2 - Add the ability to mass update the products categories, in the product grid.

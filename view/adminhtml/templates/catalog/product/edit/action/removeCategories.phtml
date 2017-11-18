@@ -1,0 +1,54 @@
+<?php
+$categories = $this->getCategoryCollection();
+$categoryHelper = $this->getCategoryHelper();
+?>
+<ul>
+    <?php
+    foreach ($categories as $category):
+        if (!$category->getIsActive()) {
+            continue;
+        }
+
+        ?>
+        <li>
+            <input name="remove_category_ids[]"
+            value="<?= /* @escapeNotVerified */ $category->getId() ?>"
+            class="checkbox category-checkbox"
+            id="remove_product_category_<?= /* @escapeNotVerified */ $category->getId() ?>"
+            type="checkbox" />
+            <label for="remove_product_category_<?= /* @escapeNotVerified */ $category->getId() ?>">
+                <?= $block->escapeHtml($category->getName()) ?>
+            </label>
+        </li>
+        <?php
+        if ($childrenCategories = $this->getChildCategories($category)):
+            ?>
+            <ul>
+                <?php
+                foreach ($childrenCategories as $childrenCategory):
+                    if (!$childrenCategory->getIsActive()) {
+                        continue;
+                    }
+                    ?>
+                    <li>
+                        <input name="remove_category_ids[]"
+                        value="<?= /* @escapeNotVerified */ $childrenCategory->getId() ?>"
+                        class="checkbox category-checkbox"
+                        id="remove_product_category_<?= /* @escapeNotVerified */ $childrenCategory->getId() ?>"
+                        type="checkbox" />
+                        <label for="remove_product_category_<?= /* @escapeNotVerified */ $childrenCategory->getId() ?>">
+                            <?= $block->escapeHtml($childrenCategory->getName()) ?>
+                        </label>
+                    </li>
+                    <?php if ($this->getChildCategories($childrenCategory)): ?>
+                            <?php echo $this->getSubBlockHtml($this->getChildCategories($childrenCategory)); ?>
+                    <?php endif ?>
+                    <?php
+                endforeach;
+                ?>
+            </ul>
+            <?php
+        endif;
+    endforeach;
+    ?>
+</ul>
