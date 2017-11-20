@@ -12,7 +12,7 @@ php bin/magento module:enable Paulmillband_AdminProductsToCategory
 
 php bin/magento setup:upgrade
 
-php bin/magento setup:di:compile;
+php bin/magento setup:di:compile
 
 ## Instructions
 - login to magento admin
