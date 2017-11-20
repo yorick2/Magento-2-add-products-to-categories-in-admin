@@ -2,17 +2,12 @@
 Add and remove products from a category using  update attribute on the product grids.
 
 ## Installation
-composer config repositories.paulmillband-add-products-to-categories-in-admin vcs git@github.com:yorick2/Magento-2-add-products-to-categories-in-admin.git
-
-composer require paulmillband/m2-admin-products-to-category:dev-master
-
-composer update
- 
-php bin/magento module:enable Paulmillband_AdminProductsToCategory
-
-php bin/magento setup:upgrade
-
-php bin/magento setup:di:compile
+- composer config repositories.paulmillband-add-products-to-categories-in-admin vcs git@github.com:yorick2/Magento-2-add-products-to-categories-in-admin.git
+- composer require paulmillband/m2-admin-products-to-category:dev-master
+- composer update 
+- php bin/magento module:enable Paulmillband_AdminProductsToCategory
+- php bin/magento setup:upgrade
+- php bin/magento setup:di:compile
 
 ## Instructions
 - login to magento admin
