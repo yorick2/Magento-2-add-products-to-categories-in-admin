@@ -1,7 +1,14 @@
 # magento 2 - Add the ability to mass update the products categories, in the product grid.
 Add and remove products from a category using  update attribute on the product grids.
 
-How to use
+## Enable Module
+php bin/magento module:enable Paulmillband_AdminProductsToCategory
+
+php bin/magento setup:upgrade
+
+php bin/magento setup:di:compile;
+
+## Instructions
 - login to magento admin
 - go to catalog > products 
 - select your products 
