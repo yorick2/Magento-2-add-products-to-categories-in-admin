@@ -22,6 +22,7 @@ class CategoryList extends \Magento\Backend\Block\Widget
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\View\LayoutInterface $layout,
         \Magento\Catalog\Helper\Category $categoryHelper,
+        \Paulmillband\AdminProductsToCategory\Helper\Data $helper,
         array $data = []
     ) {
         $this->context = $context;
@@ -31,6 +32,7 @@ class CategoryList extends \Magento\Backend\Block\Widget
         $this->resultPageFactory = $resultPageFactory;
         $this->layout = $layout;
         $this->storeManager = $context->getStoreManager();
+        $this->helper = $helper;
         parent::__construct(
             $context,
             $data
@@ -45,7 +47,7 @@ class CategoryList extends \Magento\Backend\Block\Widget
      */
     public function getStoreCategories($sorted = false, $asCollection = false, $toLoad = true)
     {
-        return $this->categoryHelper->getStoreCategories($sorted , $asCollection, $toLoad);
+        return $this->helper->getStoreCategories($sorted , $asCollection, $toLoad);
     }
 
     /**
