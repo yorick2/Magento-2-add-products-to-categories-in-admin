@@ -7,6 +7,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_categoryFactory;
     protected $_storeManager;
     protected $_dataCollectionFactory;
+    protected $_storeCategories;
     protected $categoryRepository;
 
     /**
