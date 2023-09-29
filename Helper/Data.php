@@ -4,9 +4,9 @@ namespace Paulmillband\AdminProductsToCategory\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
-    protected $categoryFactory;
-    protected $storeManager;
-    protected $dataCollectionFactory;
+    protected $_categoryFactory;
+    protected $_storeManager;
+    protected $_dataCollectionFactory;
     protected $categoryRepository;
 
     /**
